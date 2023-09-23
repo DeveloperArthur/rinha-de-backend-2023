@@ -11,7 +11,7 @@ import (
 
 func connectToRabbitMQServer() (*amqp.Channel, *amqp.Connection) {
 	// Conecte-se ao servidor RabbitMQ
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/") //host é o nome do serviço Docker no docker-compose
 	if err != nil {
 		log.Fatalf("Erro ao conectar-se ao RabbitMQ: %v", err)
 	} else {

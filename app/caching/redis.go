@@ -12,9 +12,9 @@ func ClientSingleton() (*redis.Client, context.Context) {
 	var instancia *redis.Client
 	if instancia == nil {
 		instancia = redis.NewClient(&redis.Options{
-			Addr:     "localhost:6379",
-			Password: "", // no password set
-			DB:       0,  // use default DB
+			Addr:     "redis:6379", //host é o nome do serviço Docker no docker-compose
+			Password: "",           // no password set
+			DB:       0,            // use default DB
 		})
 	}
 	return instancia, context.Background()
