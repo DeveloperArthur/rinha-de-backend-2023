@@ -6,6 +6,9 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 # Desenho da solução:
 ![obj](assets/solution.jpeg)
 
+Todos os componentes da solução estão rodando em containers Docker provisionados pelo docker-compose
+![obj](assets/docker.png)
+
 ## Modelagem do banco de dados:
 Este é o JSON de entrada/saída para criação/busca de pessoa:
 
