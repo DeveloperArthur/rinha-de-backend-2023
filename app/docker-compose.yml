@@ -6,9 +6,11 @@ services:
       - "5000:5000"
     depends_on:
       - postgres
-    networks:
-      - rinha-network
+      - redis
+      - rabbitmq
     restart: on-failure
+    networks:
+      - nginx_net
 
   golang-instance-2:
     image: "rinha-developerarthur-golang"
@@ -16,9 +18,9 @@ services:
       - "5001:5000"
     depends_on:
       - postgres
-    networks:
-      - rinha-network
     restart: on-failure
+    networks:
+      - nginx_net
 
   postgres:
     image: "postgres"
@@ -31,7 +33,7 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
-      - rinha-network
+      - nginx_net
 
   redis:
     image: redis
@@ -39,7 +41,7 @@ services:
       - "6379:6379"
     command: redis-server --save 60 1 --loglevel warning
     networks:
-      - rinha-network
+      - nginx_net
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -47,7 +49,19 @@ services:
       - "15672:15672"
       - "5672:5672"
     networks:
-      - rinha-network
+      - nginx_net
+
+  nginx:
+    image: nginx
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - golang-instance
+      - golang-instance-2
+    networks:
+      - nginx_net
 
 networks:
-  rinha-network:
+  nginx_net:
