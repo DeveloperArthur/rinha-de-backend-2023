@@ -16,6 +16,8 @@ func CriaPessoa(pessoa *models.Pessoa) {
 	//Pois pessoa NÃO será persistida agora, será enfileirada e salva no cache
 	pessoa.GenerateId()
 
+	pessoa.SetSearchable()
+
 	queue.Sender(pessoa)
 	caching.Set(pessoa, pessoa.ID.String())
 }

@@ -9,30 +9,12 @@ func CriaPessoa(pessoa *models.Pessoa) {
 }
 
 func BuscaPessoaPorId(pessoa *models.Pessoa, id string) bool {
-	return DB.Preload("Stack").
-		Where("id = ?", id).First(pessoa).RowsAffected == 0
+	return DB.Where("id = ?", id).First(pessoa).RowsAffected == 0
 }
 
 func BuscaPessoasPorTermo(pessoas *[]models.Pessoa, termo string) bool {
-	/*
-		query:
-		SELECT DISTINCT p.id, p.apelido, p.nome, p.nascimento
-		FROM pessoas p INNER JOIN stacks s
-		ON p.id = s.pessoa_foreign_key
-		WHERE p.apelido ILIKE '%termo%'
-		OR p.nome ILIKE '%termo%'
-		OR s.nome ILIKE '%termo%'
-	*/
-
-	return DB.Preload("Stack").Model("pessoas").
-		Select("DISTINCT pessoas.id, pessoas.apelido, pessoas.nome, pessoas.nascimento").
-		Joins("INNER JOIN stacks ON pessoas.id = stacks.pessoa_foreign_key").
-		Where("pessoas.apelido ILIKE ?", "%"+termo+"%").
-		Or("pessoas.nome ILIKE ?", "%"+termo+"%").
-		Or("stacks.nome ILIKE ?", "%"+termo+"%").
-		Limit("50").
-		Find(pessoas).
-		RowsAffected == 0
+	return DB.Where("searchable ILIKE ?", "%"+termo+"%").
+		Limit("50").Find(pessoas).RowsAffected == 0
 }
 
 func BuscaTotalDePessoasCadastradas(result *int64) {

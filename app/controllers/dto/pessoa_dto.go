@@ -18,7 +18,7 @@ func ConvertDtoToModel(pessoaDto *PessoaDto) models.Pessoa {
 		Apelido:    pessoaDto.Apelido,
 		Nome:       pessoaDto.Nome,
 		Nascimento: pessoaDto.Nascimento,
-		Stack:      models.ConvertStringStackNamesToStackList(&pessoaDto.Stack),
+		Stack:      pessoaDto.Stack,
 	}
 }
 
@@ -28,7 +28,7 @@ func ConvertModelToDto(pessoa *models.Pessoa) PessoaDto {
 		Apelido:    pessoa.Apelido,
 		Nome:       pessoa.Nome,
 		Nascimento: pessoa.Nascimento,
-		Stack:      models.GetStackNames(&pessoa.Stack),
+		Stack:      pessoa.Stack,
 	}
 }
 

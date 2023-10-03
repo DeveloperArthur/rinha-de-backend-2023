@@ -22,5 +22,5 @@ func ConectaComBancoDeDados() {
 	DB.LogMode(true)
 	//para criar uma tabela no banco de dados com
 	//base na struct Pessoa, utilizando gorm
-	DB.AutoMigrate(&models.Pessoa{}, &models.Stack{})
+	DB.AutoMigrate(&models.Pessoa{})
 }
