@@ -15,6 +15,7 @@ Todos os componentes da solução estão rodando em containers Docker provisiona
 A estratégia de balanceamento utilizada foi a fair distribution, mais especificamente a "Least Connections", esta escolha foi feita visando melhorar a disponibilidade e performance das instâncias. 
 
 Essa estratégia busca distribuir solicitações para as instâncias de forma que a instância com o menor número de conexões ativas seja escolhida para receber a próxima solicitação.
+
 ![obj](assets/fairdistribuition.png)
 
 ### Index
@@ -31,18 +32,12 @@ Eu tinha feito essa modelagem:
 
 Justamente pra poder executar essa query na [busca por termo](https://github.com/zanfranceschi/rinha-de-backend-2023-q3/blob/main/INSTRUCOES.md#busca-de-pessoas):
 
-    SELECT id, apelido, nome, nascimento
-    FROM pessoas
-    WHERE 
-    apelido ILIKE '%termo%' OR
-    nome ILIKE '%termo%' OR
-    EXISTS (
-        SELECT 1
-        FROM stacks
-        WHERE
-        stacks.pessoa_foreign_key = pessoas.id AND
-        stacks.nome ILIKE '%termo%'
-    );
+    SELECT DISTINCT p.id, p.apelido, p.nome, p.nascimento
+    FROM pessoas p INNER JOIN stacks s
+    ON p.id = s.pessoa_foreign_key
+    WHERE p.apelido ILIKE '%termo%'
+    OR p.nome ILIKE '%termo%'
+    OR s.nome ILIKE '%termo%'
 
 Que funciona, mas sei que `subselects` não são performáticos quando são utilizados em `WHERE`.
 
