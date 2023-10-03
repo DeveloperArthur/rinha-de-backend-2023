@@ -9,26 +9,6 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 Todos os componentes da solução estão rodando em containers Docker provisionados pelo docker-compose
 ![obj](assets/docker.png)
 
-## Modelagem do banco de dados:
-Este é o JSON de entrada/saída para criação/busca de pessoa:
-
-    {
-        //id somente para no JSON de saída
-        "id": "f7379ae8-8f9b-4cd5-8221-51efe19e721b" 
-        "apelido" : "josé",
-        "nome" : "José Roberto",
-        "nascimento" : "2000-10-01",
-        "stack" : ["C#", "Node", "Oracle"]
-    }
-
-Então optei por esta modelagem:
-![obj](assets/cardinalidade.jpeg)
-Pois seria inviável armazenar um array de string inteira em uma coluna dentro da tabela Pessoa, por isso modelei dessa forma, onde o objeto Pessoa pode ter muitas Stacks.
-
-Dessa forma quando recebo o JSON para criação de pessoas, converto o array de strings em uma lista de Stacks, e na hora de buscar pessoa, antes de retornar eu converto a lista de Stacks para um array de string.
-
-Toda essa lógica está presente dentro da model Stack, Stack é um domínio rico.
-
 ## Estratégias utilizadas para performance
 
 ### Least Connections Load Balancing
@@ -40,8 +20,42 @@ Essa estratégia busca distribuir solicitações para as instâncias de forma qu
 ### Index
 [Problemas de desempenho, como lentidão, podem ser reduzidos em até 50% após criação de index](https://youtu.be/0TMr8rsmU-k?si=7P9A69yanuie5fu1&t=2719), proporcionando um ganho significativo de desempenho.
 
-Então como medida preventiva, para evitar problemas de desempenho, foram criados indexes no banco de dados na tabela `pessoas` para as colunas `id`, `nome`, `apelido`, e foi criado index na tabela `stacks` para a coluna `nome`, eu criei index nessas colunas pois são utilizadas em queries nas cláusuras `WHERE` 
-![obj](assets/indexes.png)
+Então como medida preventiva, para evitar problemas de desempenho, foram criados indexes no banco de dados na tabela `pessoas` para as colunas `id` e `searchable`, criei index nessas colunas pois são utilizadas em queries nas cláusuras `WHERE` 
+![obj](assets/indexes2.png)
+
+### Indexação de pesquisa textual
+
+Eu tinha feito essa modelagem:
+
+![obj](assets/cardinalidade.jpeg)
+
+Justamente pra poder executar essa query na [busca por termo](https://github.com/zanfranceschi/rinha-de-backend-2023-q3/blob/main/INSTRUCOES.md#busca-de-pessoas):
+
+    SELECT id, apelido, nome, nascimento
+    FROM pessoas
+    WHERE 
+    apelido ILIKE '%termo%' OR
+    nome ILIKE '%termo%' OR
+    EXISTS (
+        SELECT 1
+        FROM stacks
+        WHERE
+        stacks.pessoa_foreign_key = pessoas.id AND
+        stacks.nome ILIKE '%termo%'
+    );
+
+Que funciona, mas sei que `subselects` não são performáticos quando são utilizados em `WHERE`.
+
+Assisti [um vídeo do Fabio Akita](https://youtu.be/EifK2a_5K_U?si=Si58nt3-voLbw8Oy&t=2849) e [do MrPowerGamerBR](https://youtu.be/XqYdhlkRlus?si=AxTRXfOJo_a9KQcp&t=336), onde eles falam sobre a rinha de backend, e ambos deram a sugestão de utilizar **indexação de pesquisa textual**, invés de `subselects`.
+
+Aceitei a sugestão deles e refatorei meu código, [transformei stack em um array de string dentro da tabela Pessoa](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/7fdd803d7c6661117fdcca6cf8f93d77f7a9a839), [removi a entidade Stack](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/797113cfb730c90e00c6a3f45137340e6b96351e), criei um campo Searchable na model Pessoa e um método que popula esse campo:
+
+    func (pessoa *Pessoa) SetSearchable() {
+        pessoa.Searchable = pessoa.Nome + pessoa.Apelido
+        for _, s := range pessoa.Stack {
+            pessoa.Searchable += s
+        }
+    }
 
 ### Fila & cache
 [Serviço de fila e cache costumam resolver 80% dos problemas de escalabilidade](https://youtu.be/0TMr8rsmU-k?si=JtA2c28HMNBFo3Sb&t=2610), portanto:
