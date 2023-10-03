@@ -16,6 +16,7 @@ func CriaPessoa(pessoa *models.Pessoa) {
 	//Pois pessoa NÃO será persistida agora, será enfileirada e salva no cache
 	pessoa.GenerateId()
 
+	//https://github.com/DeveloperArthur/rinha-de-backend-2023#indexa%C3%A7%C3%A3o-de-pesquisa-textual
 	pessoa.SetSearchable()
 
 	queue.Sender(pessoa)
