@@ -22,6 +22,7 @@ Essa estratégia busca distribuir solicitações para as instâncias de forma qu
 [Problemas de desempenho, como lentidão, podem ser reduzidos em até 50% após criação de index](https://youtu.be/0TMr8rsmU-k?si=7P9A69yanuie5fu1&t=2719), proporcionando um ganho significativo de desempenho.
 
 Então como medida preventiva, para evitar problemas de desempenho, foram criados indexes no banco de dados na tabela `pessoas` para as colunas `id` e `searchable`, criei index nessas colunas pois são utilizadas em queries nas cláusuras `WHERE` 
+
 ![obj](assets/indexes.png)
 
 ### Indexação de pesquisa textual
