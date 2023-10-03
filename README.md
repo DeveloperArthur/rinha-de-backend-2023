@@ -46,7 +46,7 @@ Justamente pra poder executar essa query na [busca por termo](https://github.com
 
 Que funciona, mas sei que `subselects` não são performáticos quando são utilizados em `WHERE`.
 
-Assisti [um vídeo do Fabio Akita](https://youtu.be/EifK2a_5K_U?si=Si58nt3-voLbw8Oy&t=2849) e [do MrPowerGamerBR](https://youtu.be/XqYdhlkRlus?si=AxTRXfOJo_a9KQcp&t=336), onde eles falam sobre a rinha de backend, e ambos deram a sugestão de utilizar **indexação de pesquisa textual**, invés de `subselects`.
+Assisti [um vídeo do Fabio Akita](https://youtu.be/EifK2a_5K_U?si=xL7RDnAtjgnlNpxO&t=2826) e [do MrPowerGamerBR](https://youtu.be/XqYdhlkRlus?t=277), onde eles falam sobre a rinha de backend, e ambos deram a sugestão de utilizar **indexação de pesquisa textual**, invés de `subselects`.
 
 Aceitei a sugestão deles e refatorei meu código, [transformei stack em um array de string dentro da tabela Pessoa](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/7fdd803d7c6661117fdcca6cf8f93d77f7a9a839), [removi a entidade Stack](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/797113cfb730c90e00c6a3f45137340e6b96351e), criei um campo Searchable na model Pessoa e um método que popula esse campo:
 
