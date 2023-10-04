@@ -85,7 +85,7 @@ O Vagrantfile vai iniciar a VM e realizar as configurações necessárias: criar
 
 Quando o teste finalizar, execute os seguintes comandos:
     
-    vagrant ssh
-    vagrant destroy
+    vagrant ssh # para conferir qual foi o resultado
+    vagrant destroy # para destruir a VM
 
 ## Resultado final: 
