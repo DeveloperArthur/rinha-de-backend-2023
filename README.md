@@ -6,7 +6,8 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 # Desenho da solução:
 ![obj](assets/solution.jpeg)
 
-Todos os componentes da solução estão rodando em containers Docker provisionados pelo docker-compose
+Todos os componentes da solução irão rodar em containers Docker provisionados pelo docker-compose
+
 ![obj](assets/docker.png)
 
 ## Estratégias utilizadas para performance
