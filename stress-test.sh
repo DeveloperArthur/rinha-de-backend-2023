@@ -18,14 +18,14 @@ for competidor in ${competidores[@]}; do
     echo "pausa de 3 minutos para startup pra API"
     sleep 180
     echo "iniciando teste"
-    sh $GATLING_BIN_DIR/gatling.sh -rm local -s RinhaBackendSimulation \
+    sudo sh $GATLING_BIN_DIR/gatling.sh -rm local -s RinhaBackendSimulation \
         -rd $competidor \
         -rf "$RESULTS_WORKSPACE/$competidor" \
         -sf $GATLING_WORKSPACE/user-files/simulations \
         -rsf $GATLING_WORKSPACE/user-files/resources
     echo "teste finalizado"
     echo "fazendo request e salvando a contagem de pessoas"
-    curl -v "http://localhost:9999/contagem-pessoas" > "$RESULTS_WORKSPACE/$competidor/contagem-pessoas.log"
+    sudo curl -v "http://localhost:9999/contagem-pessoas" > "$RESULTS_WORKSPACE/$competidor/contagem-pessoas.log"
     echo "cleaning up do docker"
     sudo docker-compose rm -f
     sudo docker-compose down
