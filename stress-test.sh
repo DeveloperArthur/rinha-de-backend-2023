@@ -13,8 +13,8 @@ for competidor in ${competidores[@]}; do
     cd $diretorio
     echo "iniciando e logando execução da API"
     mkdir "$RESULTS_WORKSPACE/$competidor"
-    docker-compose up -d --build
-    docker-compose logs > "$RESULTS_WORKSPACE/$competidor/docker-compose.logs"
+    sudo docker-compose up -d --build
+    sudo docker-compose logs > "$RESULTS_WORKSPACE/$competidor/docker-compose.logs"
     echo "pausa de 3 minutos para startup pra API"
     sleep 180
     echo "iniciando teste"
@@ -27,7 +27,7 @@ for competidor in ${competidores[@]}; do
     echo "fazendo request e salvando a contagem de pessoas"
     curl -v "http://localhost:9999/contagem-pessoas" > "$RESULTS_WORKSPACE/$competidor/contagem-pessoas.log"
     echo "cleaning up do docker"
-    docker-compose rm -f
-    docker-compose down
+    sudo docker-compose rm -f
+    sudo docker-compose down
 )
 done
