@@ -63,17 +63,5 @@ services:
     networks:
       - nginx_net
 
-  pgadmin-compose:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "arthur@tatay.com"
-      PGADMIN_DEFAULT_PASSWORD: "123456"
-    ports:
-      - "54321:80"
-    depends_on:
-      - postgres
-    networks:
-      - nginx_net
-
 networks:
   nginx_net:
