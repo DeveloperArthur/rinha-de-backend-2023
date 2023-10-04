@@ -66,4 +66,14 @@ Como medida preventiva, para contornar a divergência de dados que será gerada 
 
 E iremos utilizar programação paralela neste caso pois os processos de **enfileirar pessoa** e **gravar pessoa no caching** serão realizados **ao mesmo tempo**.
 
+## Executando teste:
+
+    git clone https://github.com/DeveloperArthur/rinha-de-backend-2023.git
+
+    docker build -t rinha-developerarthur-golang .
+
+    mkdir app/postgres-data
+
+    sh stress-test.sh
+
 ## Resultado final: 
