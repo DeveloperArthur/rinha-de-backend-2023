@@ -15,8 +15,8 @@ for competidor in ${competidores[@]}; do
     mkdir "$RESULTS_WORKSPACE/$competidor"
     sudo docker-compose up -d --build
     sudo docker-compose logs > "$RESULTS_WORKSPACE/$competidor/docker-compose.logs"
-    echo "pausa de 3 minutos para startup pra API"
-    sleep 180
+    echo "pausa de 15 segundos para startup pra API"
+    sleep 15
     echo "iniciando teste"
     sudo sh $GATLING_BIN_DIR/gatling.sh -rm local -s RinhaBackendSimulation \
         -rd $competidor \
