@@ -18,13 +18,6 @@ Dentro da VM, os componentes da solução irão rodar em containers Docker provi
 
 ## Estratégias utilizadas para performance
 
-### Least Connections Load Balancing
-A estratégia de balanceamento utilizada foi a fair distribution, mais especificamente a "Least Connections", esta escolha foi feita visando melhorar a disponibilidade e performance das instâncias. 
-
-Essa estratégia busca distribuir solicitações para as instâncias de forma que a instância com o menor número de conexões ativas seja escolhida para receber a próxima solicitação.
-
-![obj](assets/fairdistribuition.png)
-
 ### Index
 [Problemas de desempenho, como lentidão, podem ser reduzidos em até 50% após criação de index](https://youtu.be/0TMr8rsmU-k?si=7P9A69yanuie5fu1&t=2719), proporcionando um ganho significativo de desempenho.
 
@@ -72,6 +65,13 @@ e foi utilizado serviço de cache com Redis nos endpoints de busca de pessoas po
 Como medida preventiva, para contornar a divergência de dados que será gerada devido a consistência eventual da fila, iremos gravar a pessoa no cache logo após enviar o payload para o serviço de fila, isso será feito para evitar que o usuário busque as informações da pessoa logo após cadastra-la e a API retorne `404 Pessoa não encontrada`, isso pode acontecer se a pessoa ainda estiver na fila, ou seja, ainda não foi persistida no banco de dados.
 
 E iremos utilizar programação paralela neste caso pois os processos de **enfileirar pessoa** e **gravar pessoa no caching** serão realizados **ao mesmo tempo**.
+
+### Least Connections Load Balancing
+A estratégia de balanceamento utilizada no Nginx foi a "Least Connections", esta escolha foi feita visando melhorar a disponibilidade e performance das instâncias. 
+
+Essa estratégia busca distribuir solicitações para as instâncias de forma que a instância com o menor número de conexões ativas seja escolhida para receber a próxima solicitação.
+
+![obj](assets/fairdistribuition.png)
 
 ## Executando teste:
 
