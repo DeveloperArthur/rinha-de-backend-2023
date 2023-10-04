@@ -2,8 +2,7 @@ GATLING_BIN_DIR=../gatling/bin
 GATLING_WORKSPACE=../gatling
 RESULTS_WORKSPACE=../gatling/user-files/results
 
-competidores=(
-	"DeveloperArthur")
+competidores=("DeveloperArthur")
 
 for competidor in ${competidores[@]}; do
 (
