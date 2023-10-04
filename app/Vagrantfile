@@ -25,6 +25,6 @@ Vagrant.configure("2") do |config|
 
         echo "Executando o script de teste de estresse..."
         cd ..
-        sh stress-test.sh
+        bash stress-test.sh
     SHELL
 end
