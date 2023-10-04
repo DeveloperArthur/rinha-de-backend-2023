@@ -6,7 +6,13 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 # Desenho da solução:
 ![obj](assets/solution.jpeg)
 
-Todos os componentes da solução irão rodar em containers Docker provisionados pelo docker-compose
+## Infraestrutura da solução
+
+Todos os componentes da solução irão rodar dentro de uma VM, provisionada pelo Vagrant:
+
+![obj](assets/vm.jpeg)
+
+Dentro da VM, os componentes da solução irão rodar em containers Docker provisionados pelo docker-compose:
 
 ![obj](assets/docker.png)
 
@@ -69,12 +75,17 @@ E iremos utilizar programação paralela neste caso pois os processos de **enfil
 
 ## Executando teste:
 
-    git clone https://github.com/DeveloperArthur/rinha-de-backend-2023.git
+Para realizar a execução do teste, basta rodar os seguintes comandos:
 
-    docker build -t rinha-developerarthur-golang .
+    cd ./app
+    vagrant init hashicorp/bionic64
+    vagrant up
 
-    mkdir app/postgres-data
+O Vagrantfile vai iniciar a VM e realizar as configurações necessárias: criar imagem docker, executar o gatling etc
 
-    sh stress-test.sh
+Quando o teste finalizar, execute os seguintes comandos:
+    
+    vagrant ssh
+    vagrant destroy
 
 ## Resultado final: 
