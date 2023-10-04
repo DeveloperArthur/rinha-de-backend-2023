@@ -71,7 +71,7 @@ A estratégia de balanceamento utilizada no Nginx foi a "Least Connections", est
 
 Essa estratégia busca distribuir solicitações para as instâncias de forma que a instância com o menor número de conexões ativas seja escolhida para receber a próxima solicitação.
 
-![obj](assets/fairdistribuition.png)
+<img src="assets/leastconnection.png" style="height: 300px; width:400px;"/>
 
 ## Executando teste:
 
