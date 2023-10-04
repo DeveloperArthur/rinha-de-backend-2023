@@ -9,12 +9,21 @@ Vagrant.configure("2") do |config|
     config.vm.network "private_network", type: "dhcp"
 
     config.vm.provision "shell", inline: <<-SHELL
+        echo "Atualizando pacotes..."    
         apt-get update
+
+        echo "Instalando Docker..."
         sudo apt-get install -y docker.io
+
+        echo "Clonando o repositório..."
         git clone https://github.com/DeveloperArthur/rinha-de-backend-2023.git
         cd rinha-de-backend-2023/app
-        docker build -t rinha-developerarthur-golang .
         mkdir postgres-data
+
+        echo "Construindo a imagem Docker..."
+        docker build -t rinha-developerarthur-golang .
+
+        echo "Executando o script de teste de estresse..."
         cd ..
         sh stress-test.sh
     SHELL
