@@ -25,6 +25,7 @@ for competidor in ${competidores[@]}; do
         -rsf $GATLING_WORKSPACE/user-files/resources
     echo "teste finalizado"
     echo "fazendo request e salvando a contagem de pessoas"
+    curl -H -i -N "http://localhost:9999/contagem-pessoas"
     sudo curl -v "http://localhost:9999/contagem-pessoas" > "$RESULTS_WORKSPACE/$competidor/contagem-pessoas.log"
     echo "cleaning up do docker"
     sudo docker-compose rm -f
