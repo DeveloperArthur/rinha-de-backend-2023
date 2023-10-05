@@ -9,7 +9,8 @@ services:
       - redis
       - rabbitmq
     restart: on-failure
-    network_mode: "host"
+    networks:
+      - nginx_net
 
   golang-instance-2:
     image: "rinha-developerarthur-golang"
@@ -18,7 +19,8 @@ services:
     depends_on:
       - postgres
     restart: on-failure
-    network_mode: "host"
+    networks:
+      - nginx_net
 
   postgres:
     image: "postgres"
@@ -30,21 +32,24 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
-    network_mode: "host"
+    networks:
+      - nginx_net
 
   redis:
     image: redis
     ports:
       - "6379:6379"
     command: redis-server --save 60 1 --loglevel warning
-    network_mode: "host"
+    networks:
+      - nginx_net
 
   rabbitmq:
     image: rabbitmq:3-management
     ports:
       - "15672:15672"
       - "5672:5672"
-    network_mode: "host"
+    networks:
+      - nginx_net
 
   nginx:
     image: nginx
@@ -55,4 +60,8 @@ services:
     depends_on:
       - golang-instance
       - golang-instance-2
-    network_mode: "host"
+    networks:
+      - nginx_net
+
+networks:
+  nginx_net:
