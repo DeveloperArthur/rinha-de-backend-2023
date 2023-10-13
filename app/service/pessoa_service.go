@@ -6,21 +6,14 @@ import (
 	"golang-first-api-rest/caching"
 	"golang-first-api-rest/database"
 	"golang-first-api-rest/models"
-	"golang-first-api-rest/queue"
 	"golang-first-api-rest/util"
 )
 
-func CriaPessoa(pessoa *models.Pessoa) {
-	//Devemos gerar o Id pois é obrigatório que a API retorne o Id
-	//Se não gerarmos o Id nesse momento, a API irá retornar Id null
-	//Pois pessoa NÃO será persistida agora, será enfileirada e salva no cache
-	pessoa.GenerateId()
-
+func CriaPessoa(pessoa *models.Pessoa) error {
 	//https://github.com/DeveloperArthur/rinha-de-backend-2023#indexa%C3%A7%C3%A3o-de-pesquisa-textual
 	pessoa.SetSearchable()
 
-	queue.Sender(pessoa)
-	caching.Set(pessoa, pessoa.ID.String())
+	return database.CriaPessoa(pessoa)
 }
 
 func BuscaPessoaPorId(pessoa *models.Pessoa, id string) bool {
@@ -65,8 +58,4 @@ func BuscaPessoasPorTermo(pessoas *[]models.Pessoa, termo string) {
 
 func BuscaTotalDePessoasCadastradas(result *int64) {
 	database.BuscaTotalDePessoasCadastradas(result)
-}
-
-func PessoaJaExisteNoBanco(pessoa *models.Pessoa) bool {
-	return database.PessoaJaExisteNoBanco(pessoa)
 }

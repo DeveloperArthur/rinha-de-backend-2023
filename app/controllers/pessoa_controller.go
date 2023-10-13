@@ -26,13 +26,13 @@ func CriaPessoa(c *gin.Context) {
 
 	pessoa := dto.ConvertDtoToModel(&pessoaDto)
 
-	if service.PessoaJaExisteNoBanco(&pessoa) {
+	error = service.CriaPessoa(&pessoa)
+	if error != nil {
 		c.JSON(http.StatusUnprocessableEntity, gin.H{
 			"Requisição inválida": "Pessoa já existe"})
 		return
 	}
 
-	service.CriaPessoa(&pessoa)
 	pessoaDto.Id = pessoa.ID
 	c.Header("Location", "/pessoas/"+pessoa.ID.String())
 	c.JSON(http.StatusCreated, pessoaDto)
