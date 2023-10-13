@@ -101,6 +101,6 @@ Decidi fazer algumas alterações na minha solução afim de conseguir um result
 
 ## Alterações
 
-A primeira coisa foi [retirar o serviço de fila](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/23d8fb2617bd0f61139d372049116885bc2e4726), devido o enfileiramento de criação de pessoas e o processo assincrono, eu precisava fazer 1 consulta na base toda vez que tinha um request para cadastro, afim de ver se o apelido já estava em uso... Retirando serviço de fila e usando uma restrição de chave única no banco de dados para garantir a unicidade do apelido simplifica a arquitetura, economiza recursos e melhora o desempenho.
+A primeira coisa foi [retirar o serviço de fila](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/23d8fb2617bd0f61139d372049116885bc2e4726), devido o enfileiramento de criação de pessoas e o processo assincrono, eu precisava fazer 1 consulta na base toda vez que tinha um request para cadastro, afim de ver se o apelido já estava em uso... Então retirei serviço de fila e usando uma restrição de chave única no banco de dados para garantir a unicidade do apelido, isso simplifica a arquitetura, economiza recursos e melhora o desempenho.
 
 ## Resultado final
