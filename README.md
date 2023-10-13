@@ -91,3 +91,16 @@ Quando o teste finalizar, execute os seguintes comandos:
 ## Resultado final: 
 
 Minha solução alcançou incríveis 386 inserções, com essa contagem eu ficaria em 51º lugar (penúltimo) na competição, eu ficaria abaixo do "leandronsp-bash" que fez 17 inserções, e acima de mim ficaria "wendryo" que fez 2.835 inserções.
+
+# Segunda chance
+
+Decidi fazer algumas alterações na minha solução afim de conseguir um resultado melhor.
+
+## Desenho da nova solução
+![obj](assets/WhatsApp%20Image%202023-10-12%20at%2022.11.46.jpeg)
+
+## Alterações
+
+A primeira coisa foi [retirar o serviço de fila](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/23d8fb2617bd0f61139d372049116885bc2e4726), devido o enfileiramento de criação de pessoas e o processo assincrono, eu precisava fazer 1 consulta na base toda vez que tinha um request para cadastro, afim de ver se o apelido já estava em uso... Retirando serviço de fila e usando uma restrição de chave única no banco de dados para garantir a unicidade do apelido simplifica a arquitetura, economiza recursos e melhora o desempenho.
+
+## Resultado final
