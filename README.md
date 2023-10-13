@@ -77,7 +77,7 @@ Essa estratégia busca distribuir solicitações para as instâncias de forma qu
 
 Para realizar a execução do teste, basta rodar os seguintes comandos:
 
-    cd ./app
+    cd rinha-de-backend-2023/app
     vagrant init hashicorp/bionic64
     vagrant up
 
@@ -89,3 +89,5 @@ Quando o teste finalizar, execute os seguintes comandos:
     vagrant destroy # para destruir a VM
 
 ## Resultado final: 
+
+Minha solução alcançou incríveis 386 inserções, com essa contagem eu ficaria em 51º lugar (penúltimo) na competição, eu ficaria abaixo do "leandronsp-bash" que fez 17 inserções, e acima de mim ficaria "wendryo" que fez 2.835 inserções.
