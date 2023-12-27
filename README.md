@@ -109,7 +109,7 @@ Decidi fazer algumas alterações na minha solução afim de conseguir um result
 
 ## Alterações para melhorar a performance
 
-### Configurando campo como UNIQUE e adeus RabbitMQ
+### Configuração de campo como UNIQUE e remoção do RabbitMQ
 
 Na primeira versão, toda vez que ia cadastrar um registro, eu fazia uma consulta no banco antes para ver se o apelido 
 já estava em uso, [realizei uma alteração](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/23d8fb2617bd0f61139d372049116885bc2e4726) 
@@ -119,7 +119,7 @@ consultar no banco, não pode ser assíncrono... pois se tentar cadastrar um ape
 erro, a API tem que tratar esse erro e retornar para o front na hora, então a inserção tem que ser síncrona, por esse 
 motivo removi o RabbitMQ da solução, não será mais necessário.
 
-### Configurando worker e pool de connections
+### Configuração de worker e pool de connections
 
 Peguei a dica do @leandronsp nesse tweet: 
 ![obj](assets/tweet.png)
