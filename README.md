@@ -124,7 +124,7 @@ motivo removi o RabbitMQ da solução, não será mais necessário.
 Peguei a dica do @leandronsp nesse tweet: 
 ![obj](assets/tweet.png)
 
-Então configurei o `worker_connections` do Nginx pra 256, na API deixei o connection pool de 15, e no Postgres `max_connections` pra 30:
+E configurei o `worker_connections` do Nginx pra 256, na API deixei o connection pool de 15, e no Postgres `max_connections` pra 30:
 
 <img src="assets/max_connections.png" style="height: 200px; width:300px;"/>
 
