@@ -101,6 +101,8 @@ Decidi fazer algumas alterações na minha solução afim de conseguir um result
 
 ## Alterações
 
+### Configurando campo como UNIQUE e adeus RabbitMQ
+
 Na primeira versão, toda vez que ia cadastrar um registro, eu fazia uma consulta no banco antes para ver se o apelido 
 já estava em uso, [realizei uma alteração](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/23d8fb2617bd0f61139d372049116885bc2e4726) 
 para não fazer mais essas consultas toda vez antes do cadastro, alterei o campo `apelido` no banco para `UNIQUE` pra garantir a unicidade 
@@ -108,5 +110,13 @@ do apelido. Antes eu consultava o apelido no banco, e inseria assincronamente co
 consultar no banco, não pode ser assíncrono... pois se tentar cadastrar um apelido já utilizado, o banco vai retornar 
 erro, a API tem que tratar esse erro e retornar para o front na hora, então a inserção tem que ser síncrona, por esse 
 motivo removi o RabbitMQ da solução, não será mais necessário.
+
+### Configurando worker e pool de connections
+
+Peguei a dica do @leandronsp nesse tweet: 
+![obj](assets/tweet.png)
+
+Então configurei o `worker_connections` do Nginx pra 256, na API deixei o connection pool de 15, e no Postgres `max_connections` para 30:
+<img src="assets/max_connections.png" style="height: 200px; width:300px;"/>
 
 ## Resultado final

@@ -23,4 +23,7 @@ func ConectaComBancoDeDados() {
 	//para criar uma tabela no banco de dados com
 	//base na struct Pessoa, utilizando gorm
 	DB.AutoMigrate(&models.Pessoa{})
+
+	//configuração do pool de conexões
+	DB.DB().SetMaxOpenConns(15)
 }
