@@ -23,9 +23,6 @@ Vagrant.configure("2") do |config|
         cd rinha-de-backend-2023/app
         mkdir postgres-data
 
-        echo "Construindo a imagem Docker..."
-        docker build -t rinha-developerarthur-golang .
-
         echo "Executando o script de teste de estresse..."
         cd ..
         bash stress-test.sh

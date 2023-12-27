@@ -1,7 +1,7 @@
 version: '3'
 services:
   golang-instance:
-    image: "rinha-developerarthur-golang"
+    build: .
     ports:
       - "5000:5000"
     depends_on:
@@ -12,7 +12,7 @@ services:
       - nginx_net
 
   golang-instance-2:
-    image: "rinha-developerarthur-golang"
+    build: .
     ports:
       - "5001:5000"
     depends_on:
