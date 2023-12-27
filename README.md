@@ -40,9 +40,13 @@ Justamente pra poder executar essa query na [busca por termo](https://github.com
     OR p.nome ILIKE '%termo%'
     OR s.nome ILIKE '%termo%'
 
-Que funciona, mas assisti [um vídeo do Fabio Akita](https://youtu.be/EifK2a_5K_U?si=xL7RDnAtjgnlNpxO&t=2826) e [do MrPowerGamerBR](https://youtu.be/XqYdhlkRlus?t=277), onde eles falam sobre a rinha de backend, e que muitos fizeram a query dessa forma, mas não é a mais performática, então ambos deram a sugestão de utilizar **indexação de pesquisa textual**
+A query funciona mas não é a forma mais performática, muito pesada:
 
-Aceitei a sugestão deles e refatorei meu código, [transformei stack em um array de string dentro da tabela Pessoa](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/7fdd803d7c6661117fdcca6cf8f93d77f7a9a839), [removi a entidade Stack](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/797113cfb730c90e00c6a3f45137340e6b96351e), criei um campo Searchable na model Pessoa e um método que popula esse campo:
+![obj](assets/buscaportermo1.png)
+
+Então segui a sugestão do [Fabio Akita](https://youtu.be/EifK2a_5K_U?si=xL7RDnAtjgnlNpxO&t=2826) e do [MrPowerGamerBR](https://youtu.be/XqYdhlkRlus?t=277) de utilizar **indexação de pesquisa textual** e refatorei meu código
+
+[Transformei stack em um array de string dentro da tabela Pessoa](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/7fdd803d7c6661117fdcca6cf8f93d77f7a9a839) e [removi a entidade Stack](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/797113cfb730c90e00c6a3f45137340e6b96351e), criei um campo Searchable na model Pessoa e um método que popula esse campo:
 
     func (pessoa *Pessoa) SetSearchable() {
         pessoa.Searchable = pessoa.Nome + pessoa.Apelido
@@ -50,6 +54,10 @@ Aceitei a sugestão deles e refatorei meu código, [transformei stack em um arra
             pessoa.Searchable += s
         }
     }
+
+A performance melhorou consideravelmente:
+
+![obj](assets/buscaportermo2.png)
 
 ### Fila & cache
 [Serviço de fila e cache costumam resolver 80% dos problemas de escalabilidade](https://youtu.be/0TMr8rsmU-k?si=JtA2c28HMNBFo3Sb&t=2610), portanto:
@@ -99,7 +107,7 @@ Decidi fazer algumas alterações na minha solução afim de conseguir um result
 ## Desenho da nova solução
 ![obj](assets/solution.jpeg)
 
-## Alterações
+## Alterações para melhorar a performance
 
 ### Configurando campo como UNIQUE e adeus RabbitMQ
 
@@ -116,7 +124,8 @@ motivo removi o RabbitMQ da solução, não será mais necessário.
 Peguei a dica do @leandronsp nesse tweet: 
 ![obj](assets/tweet.png)
 
-Então configurei o `worker_connections` do Nginx pra 256, na API deixei o connection pool de 15, e no Postgres `max_connections` para 30:
+Então configurei o `worker_connections` do Nginx pra 256, na API deixei o connection pool de 15, e no Postgres `max_connections` pra 30:
+
 <img src="assets/max_connections.png" style="height: 200px; width:300px;"/>
 
 ## Resultado final
