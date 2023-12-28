@@ -18,6 +18,7 @@ RUN go build -o main .
 
 # Exponha a porta em que o aplicativo está ouvindo (ajuste conforme necessário)
 EXPOSE 5000
+EXPOSE 5001
 
 # Defina o comando padrão para iniciar o aplicativo
 CMD ["./main"]
