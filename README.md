@@ -8,7 +8,9 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 
 ## Infraestrutura da solução
 
-Todos os componentes da solução irão rodar dentro de uma VM, provisionada pelo Vagrant:
+![obj](assets/provision.jpeg)
+
+Todos os componentes da solução irão rodar dentro de uma VM do VirtualBox, provisionada pelo Vagrant:
 
 ![obj](assets/vm.jpeg)
 
@@ -139,7 +141,7 @@ do @viniciusfcf nesse tweet:
 
 ![obj](assets/tweet2.png)
 
-E alterei meu `docker-compose`, colocando `network_mode = "host"` em todos os serviços, tirei os binds de portas, 
+E [alterei meu `docker-compose`](), colocando `network_mode = "host"` em todos os serviços, tirei os binds de portas, 
 reconfigurei as portas pra não ter conflito e alterei os endpoints pra apontar para `localhost` porque antes estavam 
 apontando para o DNS interno do docker (nome do container)
 
