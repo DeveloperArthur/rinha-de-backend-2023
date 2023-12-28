@@ -113,7 +113,7 @@ Decidi fazer algumas alterações na minha solução afim de conseguir um result
 
 ### Remoção do serviço de caching Redis
 
-[Removi o Redis da solução]() pois no meu contexto não compensa utilizar caching, [o tempo para gravar no Postgres é tão rápido quanto.](https://youtu.be/-yGHG3pnHLg?si=g2fb5MmL3Swy_CXI&t=2299)
+[Removi o Redis da solução](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/3be33c02969372d789cd2d745c661f56570b8643) pois no meu contexto não compensa utilizar caching, [o tempo para gravar no Postgres é tão rápido quanto.](https://youtu.be/-yGHG3pnHLg?si=g2fb5MmL3Swy_CXI&t=2299)
 
 ### Configuração de campo como UNIQUE e remoção do serviço de fila RabbitMQ
 
@@ -141,7 +141,7 @@ do @viniciusfcf nesse tweet:
 
 ![obj](assets/tweet2.png)
 
-E [alterei meu `docker-compose`](), colocando `network_mode = "host"` em todos os serviços, tirei os binds de portas, 
+E [alterei meu `docker-compose`](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/08afd1f7ab767707d3259969f77343ba08d821a5), colocando `network_mode = "host"` em todos os serviços, tirei os binds de portas, 
 reconfigurei as portas pra não ter conflito e alterei os endpoints pra apontar para `localhost` porque antes estavam 
 apontando para o DNS interno do docker (nome do container)
 
