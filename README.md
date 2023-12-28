@@ -109,7 +109,11 @@ Decidi fazer algumas alterações na minha solução afim de conseguir um result
 
 ## Alterações para melhorar a performance
 
-### Configuração de campo como UNIQUE e remoção do RabbitMQ
+### Remoção do serviço de caching Redis
+
+[Removi o Redis da solução]() pois no meu contexto não compensa utilizar caching, [o tempo para gravar no Postgres é tão rápido quanto.](https://youtu.be/-yGHG3pnHLg?si=g2fb5MmL3Swy_CXI&t=2299)
+
+### Configuração de campo como UNIQUE e remoção do serviço de fila RabbitMQ
 
 Na primeira versão, toda vez que ia cadastrar um registro, eu fazia uma consulta no banco antes para ver se o apelido 
 já estava em uso, [realizei uma alteração](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/23d8fb2617bd0f61139d372049116885bc2e4726) 

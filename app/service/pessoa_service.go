@@ -1,12 +1,8 @@
 package service
 
 import (
-	"fmt"
-	"github.com/redis/go-redis/v9"
-	"golang-first-api-rest/caching"
 	"golang-first-api-rest/database"
 	"golang-first-api-rest/models"
-	"golang-first-api-rest/util"
 )
 
 func CriaPessoa(pessoa *models.Pessoa) error {
@@ -17,43 +13,11 @@ func CriaPessoa(pessoa *models.Pessoa) error {
 }
 
 func BuscaPessoaPorId(pessoa *models.Pessoa, id string) bool {
-	var recordNotFound bool
-	fmt.Println("LOG: Buscando do cache")
-	pessoaEmJson, err := caching.Get(id)
-	if err == redis.Nil {
-		fmt.Println("LOG: Não está no cache, buscando no banco...")
-		recordNotFound = database.BuscaPessoaPorId(pessoa, id)
-		if recordNotFound == false {
-			caching.Set(pessoa, id)
-			fmt.Println("LOG: Salvo no cache com sucesso")
-		}
-		return recordNotFound
-	} else if err != nil {
-		panic(err)
-	} else {
-		//record found, está no cache!
-		recordNotFound = false
-		util.Deserialize(pessoaEmJson, pessoa)
-		return recordNotFound
-	}
+	return database.BuscaPessoaPorId(pessoa, id)
 }
 
 func BuscaPessoasPorTermo(pessoas *[]models.Pessoa, termo string) {
-	fmt.Println("LOG: Buscando do cache")
-	pessoaEmJson, err := caching.Get(termo)
-	if err == redis.Nil {
-		fmt.Println("LOG: Não está no cache, buscando no banco...")
-		recordNotFound := database.BuscaPessoasPorTermo(pessoas, termo)
-		if recordNotFound == false {
-			caching.SetList(pessoas, termo)
-			fmt.Println("LOG: Salvo no cache com sucesso")
-		}
-	} else if err != nil {
-		panic(err)
-	} else {
-		//record found, está no cache!
-		util.DeserializeList(pessoaEmJson, pessoas)
-	}
+	database.BuscaPessoasPorTermo(pessoas, termo)
 }
 
 func BuscaTotalDePessoasCadastradas(result *int64) {
