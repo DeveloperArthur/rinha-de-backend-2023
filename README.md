@@ -134,15 +134,4 @@ E configurei o `worker_connections` do Nginx pra 256, na API deixei o connection
 
 <img src="assets/max_connections.png" style="height: 200px; width:300px;"/>
 
-### Configuração na rede do Docker
-
-Na minha solução notei que 100% dos KOs foram por causa do erro `"j.i.IOException: Premature close"`, então peguei a dica 
-do @viniciusfcf nesse tweet:
-
-![obj](assets/tweet2.png)
-
-E [alterei meu `docker-compose`](https://github.com/DeveloperArthur/rinha-de-backend-2023/commit/08afd1f7ab767707d3259969f77343ba08d821a5), colocando `network_mode = "host"` em todos os serviços, tirei os binds de portas, 
-reconfigurei as portas pra não ter conflito e alterei os endpoints pra apontar para `localhost` porque antes estavam 
-apontando para o DNS interno do docker (nome do container)
-
 ## Resultado final

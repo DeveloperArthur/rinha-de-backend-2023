@@ -13,7 +13,7 @@ var (
 )
 
 func ConectaComBancoDeDados() {
-	stringDeConexao := "host=localhost user=root password=root dbname=root port=5432 sslmode=disable" //host é o nome do serviço Docker no docker-compose
+	stringDeConexao := "host=postgres user=root password=root dbname=root port=5432 sslmode=disable" //host é o nome do serviço Docker no docker-compose
 	DB, err = gorm.Open("postgres", stringDeConexao)
 	if err != nil {
 		log.Panic("Erro ao conectar com banco de dados: ", err)

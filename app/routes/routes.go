@@ -11,5 +11,5 @@ func HandleRequests() {
 	r.GET("/pessoas/:id", controllers.BuscaPessoaPorId)
 	r.GET("/pessoas", controllers.BuscaPessoasPorTermo)
 	r.GET("/contagem-pessoas", controllers.BuscaTotalDePessoasCadastradas)
-	r.Run()
+	r.Run(":5000") //listen and serve on localhost:5000
 }
