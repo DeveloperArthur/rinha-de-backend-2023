@@ -8,7 +8,7 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 
 ## Infraestrutura da solução
 
-<img src="assets/provision.jpeg" style="height: 350px; width:5000px;"/>
+<img src="assets/provision.jpeg" style="height: 400px; width:600px;"/>
 
 Todos os componentes da solução irão rodar dentro de uma VM do VirtualBox, provisionada pelo Vagrant:
 
