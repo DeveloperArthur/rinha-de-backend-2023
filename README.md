@@ -102,6 +102,8 @@ Quando o teste finalizar, execute os seguintes comandos:
 
 Minha solução alcançou incríveis 386 inserções, com essa contagem eu ficaria em 51º lugar (penúltimo) na competição, eu ficaria abaixo do "leandronsp-bash" que fez 17 inserções, e acima de mim ficaria "wendryo" que fez 2.835 inserções.
 
+<hr style="border:1px solid gray">
+
 # Segunda chance
 
 Decidi fazer algumas alterações na minha solução afim de conseguir um resultado melhor.
@@ -135,3 +137,14 @@ E configurei o `worker_connections` do Nginx pra 256, na API deixei o connection
 <img src="assets/max_connections.png" style="height: 200px; width:300px;"/>
 
 ## Resultado final
+
+Depois que fiz essas alterações na arquitetura, alcancei um resultado muito melhor do que o primeiro, 
+a nova solução alcançou **26.586** inserções, com essa contagem eu ficaria em 16º lugar na competição, eu ficaria abaixo do
+"saiintbrisson" que fez 26.567 inserções, e acima de mim ficaria "rode" que fez 26.607 inserções.
+
+Fui de penúltimo (51º) á top 20 (16º) simplificando a arquitetura, economizando recursos e melhorando o desempenho
+
+![obj](assets/gatling1.png)
+![obj](assets/gatling2.png)
+![obj](assets/gatling3.png)
+![obj](assets/gatling4.png)
