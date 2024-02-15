@@ -142,7 +142,7 @@ Depois que fiz essas alterações na arquitetura, alcancei um resultado muito me
 a nova solução alcançou **26.586** inserções, com essa contagem eu ficaria em 16º lugar na competição, eu ficaria abaixo do
 "saiintbrisson" que fez 26.567 inserções, e acima de mim ficaria "rode" que fez 26.607 inserções.
 
-Fui de penúltimo (51º) á top 20 (16º) simplificando a arquitetura, economizando recursos e melhorando o desempenho
+Fui de penúltimo (51º) á top 20 (16º) simplificando a arquitetura, isso fez com que economizasse recursos e consequentemente melhorou o desempenho
 
 ![obj](assets/gatling1.png)
 ![obj](assets/gatling2.png)
