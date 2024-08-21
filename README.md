@@ -10,7 +10,7 @@ Link do desafio original: https://github.com/zanfranceschi/rinha-de-backend-2023
 
 <img src="assets/provision.jpeg" style="height: 400px; width:600px;"/>
 
-Todos os componentes da solução irão rodar dentro de uma VM do VirtualBox, provisionada pelo Vagrant:
+Todos os componentes da solução irão rodar dentro de uma [VM do VirtualBox, provisionada pelo Vagrant](https://www.linkedin.com/feed/update/urn:li:ugcPost:7115499454178222080?commentUrn=urn%3Ali%3Acomment%3A%28ugcPost%3A7115499454178222080%2C7116224832840564736%29&replyUrn=urn%3Ali%3Acomment%3A%28ugcPost%3A7115499454178222080%2C7116409378886303745%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287116224832840564736%2Curn%3Ali%3AugcPost%3A7115499454178222080%29&dashReplyUrn=urn%3Ali%3Afsd_comment%3A%287116409378886303745%2Curn%3Ali%3AugcPost%3A7115499454178222080%29):
 
 ![obj](assets/vm.jpeg)
 
